@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -60,10 +61,25 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
+static const char *brupcmd[]  = { "brup", NULL };
+static const char *brdowncmd[]  = { "brdown", NULL };
+static const char *volmutecmd[]  = { "volmute", NULL };
+static const char *volmicmutecmd[]  = { "volmicmute", NULL };
+static const char *volupcmd[]  = { "volup", NULL };
+static const char *voldowncmd[]  = { "voldown", NULL };
+static const char *moncmd[]  = { "mon", NULL };
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ 0,               XF86XK_MonBrightnessUp, spawn,          {.v = brupcmd } },
+	{ 0,             XF86XK_MonBrightnessDown, spawn,          {.v = brdowncmd } },
+	{ 0,                     XF86XK_AudioMute, spawn,          {.v = volmutecmd } },
+	{ 0,                  XF86XK_AudioMicMute, spawn,          {.v = volmicmutecmd } },
+	{ 0,              XF86XK_AudioLowerVolume, spawn,          {.v = voldowncmd } },
+	{ 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = volupcmd } },
+	{ 0,                       XF86XK_Display, spawn,          {.v = moncmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
